@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Events</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="spinner-overlay" *ngIf="isLoading">
+    <ion-spinner></ion-spinner>
+  </div>
+
+  <ion-card *ngFor="let event of events$ | async">
+    <div class="actionbtn">
+      <ion-fab size="small" vertical="top" horizontal="end" slot="fixed">
+        <ion-fab-button size="small" id="expand">
+          <ion-icon size="small" name="ellipsis-vertical-outline"></ion-icon>
+        </ion-fab-button>
+
+        <ion-fab-list side="bottom">
+          <ion-fab-button>
+            <ion-button fill="clear" (click)="navigateToUpdate(event.id)"><ion-icon name="create-outline"></ion-icon></ion-button>
+          </ion-fab-button>
+          <ion-fab-button>
+            <ion-button fill="clear"><ion-icon color="success" name="archive-outline"></ion-icon></ion-button>
+          </ion-fab-button>
+          <ion-fab-button>
+            <ion-button fill="clear" (click)="deleteEvent(event.id)" [disabled]="isLoading">
+              <ion-icon *ngIf="!isLoading" color="danger" name="trash-outline"></ion-icon>
+            </ion-button>
+          </ion-fab-button>
+        </ion-fab-list>
+      </ion-fab>
+    </div>
+
+    <ion-card-header>
+      <ion-card-subtitle>
+        <h6 id="type">{{ event.type }}</h6>
+      </ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item lines="nones">
+        <ion-icon name="today-outline" slot="start" color="primary"></ion-icon>
+        <ion-label>
+          {{ event.title }}
+          
+          <p>{{ event.datetime }}</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item lines="nones">
+        <ion-label>
+          <div class="author" *ngIf="event.speaker">
+            <sup>Presented by {{ event.speaker }}</sup>
+          </div>
+
+          <div class="author" *ngIf="!event.speaker">
+            <sup>N/A</sup>
+          </div>
+
+          <div>
+            <sup><b>Location: {{ event.location }}</b></sup>
+          </div>
+
+          <p class="description">{{ event.description }}</p>
+
+          <div class="author" align="right">
+            <sub>Organized by {{ event.organized }}</sub>
+          </div>
+        </ion-label>
+      </ion-item>
+
+      <ion-button color="success" fill="clear" size="full">See all...</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button id="expand" size="small">
+      <ion-icon name="apps"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-list side="start">
+      <ion-fab-button (click)="PathtoCreate()">
+        <ion-button fill="clear"><ion-icon name="add"></ion-icon></ion-button>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>

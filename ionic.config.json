@@ -1,0 +1,7 @@
+{
+  "name": "indoornav-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,75 @@
+<ion-header class="fullscreen-content">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Create Events</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="fullscreen-content">
+  <div class="spinner-overlay" *ngIf="isLoading">
+    <ion-spinner></ion-spinner>
+  </div>
+
+  <form (ngSubmit)="createEvents()" #bulletinForm="ngForm">
+    <ion-card-content>
+      <ion-item>
+        <div style="display: flex; flex-direction: column;">
+          <ion-label>Title</ion-label>
+          <ion-input type="text" name="title" [(ngModel)]="events.title"></ion-input>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <div style="display: flex; flex-direction: column;">
+          <ion-label>Description</ion-label>
+          <ion-textarea rows="2" type="text" name="descriptions" [(ngModel)]="events.description"></ion-textarea>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <div style="display: flex; flex-direction: column;">
+          <ion-label>Types</ion-label>
+          <ion-select placeholder="Select One..." class="custom-select" expand="full" name="type" [(ngModel)]="events.type" interface="dropdown">
+            <ion-select-option value="Workshop">Workshop</ion-select-option>
+            <ion-select-option value="Festival">Festival</ion-select-option>
+            <ion-select-option value="Conference">Conference</ion-select-option>
+          </ion-select>
+        </div>
+      </ion-item>
+      
+      <ion-item>
+        <div style="display: flex; flex-direction: column;">
+          <ion-label>Organized by</ion-label>
+          <ion-input type="text" name="organized" [(ngModel)]="events.organized"></ion-input>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <div style="display: flex; flex-direction: column;">
+          <ion-label>Speaker</ion-label>
+          <ion-input type="text" name="speaker" [(ngModel)]="events.speaker"></ion-input>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <div style="display: flex; flex-direction: column;">
+          <ion-label>Location</ion-label>
+          <ion-input type="text" name="location" [(ngModel)]="events.location"></ion-input>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <div style="display: flex; flex-direction: column;">
+          <ion-label>Date and Time</ion-label>
+          <ion-datetime display-format="MMM DD, YYYY HH:mm" picker-format="DD MMM YYYY, HH:mm" name="dateandtime" [(ngModel)]="events.datetime"></ion-datetime>
+        </div>
+      </ion-item>
+
+      <div>
+        <ion-button expand="full" fill="solid" type="submit" [disabled]="isLoading">Create</ion-button>
+      </div>
+    </ion-card-content>
+  </form>
+</ion-content>

@@ -1,0 +1,62 @@
+<ion-header class="fullscreen-content">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Create Bulletin</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="fullscreen-content">
+  <div class="spinner-overlay" *ngIf="isLoading">
+    <ion-spinner></ion-spinner>
+  </div>
+
+  <form (ngSubmit)="createBulletin()" #bulletinForm="ngForm">
+    <ion-card-content>
+      <ion-item>
+        <div style="display: flex; flex-direction: column;">
+          <ion-label>Title</ion-label>
+          <ion-input type="text" name="title" [(ngModel)]="bulletin.title"></ion-input>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <div style="display: flex; flex-direction: column;">
+          <ion-label>Types</ion-label>
+          <ion-select placeholder="Select One..." class="custom-select" expand="full" name="type" [(ngModel)]="bulletin.type" interface="dropdown">
+            <ion-select-option value="General">General</ion-select-option>
+            <ion-select-option value="Loss and Found">Loss and Found</ion-select-option>
+            <ion-select-option value="News">News</ion-select-option>
+            <ion-select-option value="Updates">Updates</ion-select-option>
+          </ion-select>
+        </div>
+      </ion-item>         
+
+      <ion-item>
+        <div style="display: flex; flex-direction: column;">
+          <ion-label>Description</ion-label>
+          <ion-textarea rows="2" type="text" name="descriptions" [(ngModel)]="bulletin.description"></ion-textarea>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <div style="display: flex; flex-direction: column;">
+          <ion-label>Date and Time</ion-label>
+          <ion-datetime display-format="MMM DD, YYYY HH:mm" picker-format="DD MMM YYYY, HH:mm" name="dateandtime" [(ngModel)]="bulletin.datetime"></ion-datetime>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <div style="display: flex; flex-direction: column;">
+          <ion-label>Exhibitor</ion-label>
+          <ion-input type="text" name="exhibitors" [(ngModel)]="bulletin.exhibitor"></ion-input>
+        </div>
+      </ion-item>
+
+      <div>
+        <ion-button expand="full" fill="solid" type="submit" [disabled]="isLoading">Create</ion-button>
+      </div>
+    </ion-card-content>
+  </form>
+</ion-content>
