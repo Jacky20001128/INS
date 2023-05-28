@@ -22,15 +22,43 @@ ion-menu.md ion-note {
   padding-left: 10px;
 }
 
-ion-menu.md ion-list#inbox-list {
-  border-bottom: 1px solid var(--ion-color-step-150, #d7d8da);
-}
+// ion-menu.md ion-list#nav-header {
+//   border-bottom: 1px solid var(--ion-color-step-150, #d7d8da);
+// }
 
-ion-menu.md ion-list#inbox-list ion-list-header {
-  font-size: 22px;
-  font-weight: 600;
+ion-menu.md ion-list.nav-header {
+  
+  ion-list-header {
 
-  min-height: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 60px;
+    width: 60px;
+
+  }
+
+  .appname {
+
+    font-weight: 1000;
+    font-size: 20px;
+    text-align: center;
+
+    #OR {
+      color: #1854a4;
+    }
+
+    #X {
+      color: #ff5757;
+    }
+  }
+
+  .email {
+    text-align: center;
+  }
+
+  hr {
+    width: 10px;
+  }
 }
 
 ion-menu.md ion-list#labels-list ion-list-header {

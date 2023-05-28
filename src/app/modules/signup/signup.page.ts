@@ -69,17 +69,18 @@ export class SignupPage implements OnInit {
     
     try{
       this.authService.userRegistration(value).then( response => {
-      console.log(response);
+
+        console.log(response);
       
-      if(response.user) {
-        response.updateProfile({
-          email: value.email,
-        });
-        
-        // this.preference.store(value.phone,'userPhoneNumber');
-        this.loading.dismiss();
-        this.router.navigate(['loginscreen']);
-      }
+        if(response.user) {
+          // response.updateProfile({
+          //   email: value.email,
+          // });
+          
+          // this.preference.store(value.phone,'userPhoneNumber');
+          this.loading.dismiss();
+          this.router.navigate(['login']);
+        }
     }, error => {
 
       // this.loading.dismiss();
