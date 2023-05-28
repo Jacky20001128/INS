@@ -54,11 +54,11 @@ export class BoothsPage implements OnInit {
   }  
 
   PathtoCreate() {
-    this.nav.navigateForward(['bulletin', 'create-bulletin'])
+    this.nav.navigateForward(['booths', 'create-booth'])
   }
 
   navigateToUpdate(documentId: string) {
-    this.nav.navigateForward(['bulletin', 'update-bulletin', documentId]);
+    this.nav.navigateForward(['booths', 'update-booth', documentId]);
 
     console.log('successful');
   }

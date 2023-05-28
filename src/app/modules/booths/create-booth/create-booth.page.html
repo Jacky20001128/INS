@@ -1,9 +1,78 @@
-<ion-header>
+<ion-header class="fullscreen-content">
   <ion-toolbar>
-    <ion-title>create-booth</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Create Booth</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="fullscreen-content">
+  <div class="spinner-overlay" *ngIf="isLoading">
+    <ion-spinner></ion-spinner>
+  </div>
 
+  <form (ngSubmit)="createBooth()">
+    <ion-card-content>
+      <ion-item>
+          <ion-label position="floating">Booth Name</ion-label>
+          <ion-input type="text" name="booth_name" [(ngModel)]="booths.name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+          <ion-label position="floating">Booth Description</ion-label>
+          <ion-textarea rows="2" type="text" name="booth_descriptions" [(ngModel)]="booths.description"></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+          <ion-label position="floating">Booth Types</ion-label>
+          <ion-select placeholder="Select One..." class="custom-select" expand="full" name="type" [(ngModel)]="booths.type" interface="dropdown">
+            <ion-select-option value="Computer Science">Computer Science</ion-select-option>
+            <ion-select-option value="Engineering and Manufacturing">Engineering and Manufacturing</ion-select-option>
+            <ion-select-option value="Finance and Banking">Finance and Banking</ion-select-option>
+            <ion-select-option value="Healthcare and Pharmaceuticals">Healthcare and Pharmaceuticals</ion-select-option>
+            <ion-select-option value="Consulting and Professional Services">Consulting and Professional Services</ion-select-option>
+            <ion-select-option value="Government and Public Sector">Government and Public Sector</ion-select-option>
+            <ion-select-option value="Education and Academia">Education and Academia</ion-select-option>
+            <ion-select-option value="Sales and Marketing">Sales and Marketing</ion-select-option>
+          </ion-select>
+      </ion-item>         
+
+      <ion-item>
+          <ion-label position="floating">Booth Location</ion-label>
+          <ion-input type="text" name="booth_location" [(ngModel)]="booths.location"></ion-input>
+      </ion-item>
+
+      <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input type="text" name="booth_email" [(ngModel)]="booths.email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+          <ion-label position="floating">Contact</ion-label>
+          <ion-input type="text" name="booth_contact" [(ngModel)]="booths.contact"></ion-input>
+      </ion-item>
+
+      <ion-item>
+          <ion-label position="floating">Website</ion-label>
+          <ion-input type="text" name="booth_website" [(ngModel)]="booths.website"></ion-input>
+      </ion-item>
+
+      <ion-item>
+          <ion-label position="floating">Products or Services</ion-label>
+          <ion-input type="text" name="prod_serv" [(ngModel)]="booths.product"></ion-input>
+      </ion-item>
+
+      <!-- <ion-item>
+        <div style="display: flex; flex-direction: column;">
+          <ion-label>Products or Services</ion-label>
+          <ion-input type="text" name="prod_serv" [(ngModel)]="booths.product"></ion-input>
+        </div>
+      </ion-item> -->
+
+      <div>
+        <ion-button expand="full" fill="solid" type="submit" [disabled]="isLoading">Create</ion-button>
+      </div>
+    </ion-card-content>
+  </form>
 </ion-content>
