@@ -9,7 +9,38 @@ import Queue from 'queue';
   styleUrls: ['./maps.page.scss'],
 })
 
-export class MapsPage implements OnInit {               
+export class MapsPage implements OnInit {
+  
+  selectedAlgorithm: string; // use for selection of algorithm
+
+  // Cyberjaya
+  fromOptions: string[] = ['entrance', 'entrance2'];
+  toOptions: string[] = [
+    'booth1','booth2','booth3','booth4','booth5','booth6','booth7','booth8','booth9','booth10',
+    'booth11','booth12','booth13','booth14','booth15','booth16','booth17','booth18','booth19','booth20',
+    'booth21','booth22','booth23','booth24','booth25','booth26','booth27','booth28','booth29','booth30',
+    'booth31','booth32','booth33','booth34','booth35','booth36','booth37','booth38','booth39','booth40',
+    'booth41','booth42','booth43','booth44','booth45','booth46','booth47','booth48','booth49','booth50',
+    'booth51','booth52','booth53','booth54','booth55','booth56','booth57','booth58','booth59','booth60',
+    'booth61','booth62','booth63','booth64','booth65','booth66','booth67','booth68','booth69','booth70',
+    'booth71','booth72','booth73','booth74','booth75','booth76','booth77','booth78','booth79','booth80',
+    'booth81','booth82','booth83','booth84','booth85','booth86','booth87','booth88','booth89','booth90',
+    'booth91','booth92','booth93','booth94','booth95','booth96','booth97','booth98','booth99','booth100',
+    'booth101','booth102','booth103','booth104','booth105','booth106','booth107','booth108','booth109','booth110',
+    'booth111','booth112','booth113','booth114','booth115','booth116','booth117','booth118','booth119','booth120',
+    'booth121','booth122','booth123','booth124','booth125','booth126','booth127',
+  ];
+
+  //Melaka
+  fromOptions2: string[] = ['entrance','door1','door2','door3','door4','door5'];
+  toOptions2: string[] = [
+    'booth1','booth2','booth3','booth4','booth5','booth6','booth7','booth8','booth9','booth10',
+    'booth11','booth12','booth13','booth14','booth15','booth16','booth17','booth18','booth19','booth20',
+    'booth21','booth22','booth23','booth24','booth25','booth26','booth27','booth28','booth29','booth30',
+    'booth31','booth32','booth33','booth34','booth35','booth36',
+    'technicalbooth', 'lpreproom','rpreproom','toilet','instru_room','performance',
+  ];
+
   private httpClient: HttpClient
 
   constructor(http: HttpClient, private elementRef: ElementRef) {
@@ -26,9 +57,7 @@ export class MapsPage implements OnInit {
 
   shapes; //2d array of square nodes
   canvas = null;//document.getElementById('myCanvas') as HTMLCanvasElement;
-  ctxGrid = null;
-
-  test = null;
+  ctxGrid = null
   
   drawWall = true;
   eraseWall = false;
@@ -37,11 +66,7 @@ export class MapsPage implements OnInit {
 
   disableButtons = false;
 
-  // startImage;
-  // noPath;
   coordinates;
-  CyberCoordinates;
-  MelakaCoordinates;
 
   ngOnInit(): void {
 
@@ -68,46 +93,27 @@ export class MapsPage implements OnInit {
 
     this.resetGrid();
 
-    // Add zooming functionality for the map
-    // let currentZoom = 0.1;
-    // const zoomFactor = 0.1;
-    // const maxZoom = 3;
-    // const minZoom = 0.1;
-
-    // this.canvas.addEventListener('wheel', (event: WheelEvent) => {
-    //   const zoomOut = event.deltaY > 0;
-
-    //   if (zoomOut && currentZoom > minZoom) {
-    //     currentZoom -= zoomFactor;
-    //   } else if (!zoomOut && currentZoom < maxZoom) {
-    //     currentZoom += zoomFactor;
-    //   }
-
-    //   // Calculate the new canvas size based on the current zoom level
-    //   const canvasWidth = this.canvas.width / currentZoom;
-    //   const canvasHeight = this.canvas.height / currentZoom;
-
-    //   this.canvas.style.width = `${canvasWidth}px`;
-    //   this.canvas.style.height = `${canvasHeight}px`;
-
-    //   event.preventDefault();
-    // });
-
     let currentZoom = 0.4;
     const zoomFactor = 0.1;
     const maxZoom = 3;
     const minZoom = 0.1;
 
     const initialCanvasWidth = 900; // Set your initial canvas width
-    const initialCanvasHeight = 400; // Set your initial canvas height
+    const initialCanvasHeight = 350; // Set your initial canvas height
+
+    // Calculate the initial canvas size based on the current zoom level
+    const canvasWidth = initialCanvasWidth * currentZoom;
+    const canvasHeight = initialCanvasHeight * currentZoom;
+
+    // Set the initial canvas size
+    this.canvas.style.width = `${canvasWidth}px`;
+    this.canvas.style.height = `${canvasHeight}px`;
 
     this.canvas.addEventListener('wheel', (event: WheelEvent) => {
       const zoomOut = event.deltaY > 0;
 
       if (zoomOut && currentZoom > minZoom) {
         currentZoom -= zoomFactor;
-
-        console.log(currentZoom);
       } else if (!zoomOut && currentZoom < maxZoom) {
         currentZoom += zoomFactor;
       }
@@ -122,7 +128,6 @@ export class MapsPage implements OnInit {
 
       event.preventDefault();
     });
-
   }
   
   getDirection() {
@@ -131,9 +136,9 @@ export class MapsPage implements OnInit {
     this.changeStartNode = true;
     this.changeEndNode = true;
 
-    const fromInput = document.querySelector('#from-input') as HTMLIonInputElement;
-    const toInput = document.querySelector('#to-input') as HTMLIonInputElement;
-  
+    const fromInput = document.querySelector('#from-input') as HTMLIonSelectElement;
+    const toInput = document.querySelector('#to-input') as HTMLIonSelectElement;
+
     const fromValue = fromInput.value;
     const toValue = toInput.value;
 
@@ -174,6 +179,7 @@ export class MapsPage implements OnInit {
         this.changeStart(startCoordinates.x, startCoordinates.y);
       }
     }
+
     if (typeof toValue === 'string' && this.coordinates.includes('cyberjaya')) {
       const lowerCaseToValue = toValue.toLowerCase();
       if (lowerCaseToValue in CyberCoordinates) {
@@ -193,7 +199,7 @@ export class MapsPage implements OnInit {
       booth31: {x:958,y:278}, booth32: {x:958,y:342}, booth33: {x:892,y:353}, booth34: {x:877,y:293}, booth35: {x:877,y:226},
       booth36: {x:877,y:160},
       technicalbooth: {x:228,y:69}, lpreproom: {x:362,y:52}, rpreproom: {x:867,y:52}, toilet: {x:1005,y:42}, 
-      instru_room: {x:875,y:478}, performance: {x:611,y:238},
+      instru_room: {x:875,y:478}, performance: {x:611,y:238}
     }
 
     // Determine the coordinates based on the selected location
@@ -212,6 +218,24 @@ export class MapsPage implements OnInit {
         const endCoordinates = MelakaCoordinates[lowerCaseToValue];
         this.changeEnd(endCoordinates.x, endCoordinates.y);
       }
+    }
+
+    this.runAlgorithm();
+  }
+
+  runAlgorithm() {
+    if (this.selectedAlgorithm === 'dijkstra') {
+      this.dijkstraSearch_A_star_variation();
+
+      console.log('Dijkstra\'s Algorithm selected');
+    } else if (this.selectedAlgorithm === 'bfs') {
+      this.bfs_Search();
+
+      console.log('BFS Algorithm selected');
+    } else if (this.selectedAlgorithm === 'a_star') {
+      this.a_star_search();
+
+      console.log('A* Algorithm selected');
     }
   }
 
@@ -638,8 +662,8 @@ export class MapsPage implements OnInit {
       //no solution
       this.disableButtons = false;
     }
-
   }
+
   async dijkstraSearch_A_star_variation() {
 
     this.clearSearchNotWalls();
@@ -664,6 +688,7 @@ export class MapsPage implements OnInit {
     }
 
     openSet.push(start);
+    const startTime = performance.now(); // Start measuring the time
 
     while (openSet.length > 0) {
 
@@ -698,6 +723,11 @@ export class MapsPage implements OnInit {
             }, this.animDelay)
           );
         }
+
+        const endTime = performance.now(); // Stop measuring the time
+        const timeTaken = (endTime - startTime) / 1000;
+        console.log('Time taken:', timeTaken, 'seconds');
+
         this.disableButtons = false;
         break;
       }
