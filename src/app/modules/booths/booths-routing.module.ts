@@ -15,7 +15,11 @@ const routes: Routes = [
   {
     path: 'update-booth',
     loadChildren: () => import('./update-booth/update-booth.module').then( m => m.UpdateBoothPageModule)
+  },  {
+    path: 'booth-detail',
+    loadChildren: () => import('./booth-detail/booth-detail.module').then( m => m.BoothDetailPageModule)
   },
+
 ];
 
 @NgModule({

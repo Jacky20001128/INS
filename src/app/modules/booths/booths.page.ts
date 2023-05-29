@@ -67,6 +67,12 @@ export class BoothsPage implements OnInit {
     console.log('successful');
   }
 
+  NavToDetail(documentId: string) {
+    this.nav.navigateForward(['booths', 'booth-detail', documentId]);
+
+    console.log('successful');
+  }
+
   sanitizeImageUrl(imageUrl: string): string {
     if (imageUrl.includes('C:\\fakepath\\')) {
       return 'assets/images/' + imageUrl.substr(imageUrl.lastIndexOf('\\') + 1);

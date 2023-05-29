@@ -9,6 +9,7 @@ import { Booth } from 'src/app/modules/booths/booths.page'; // Import the Bullet
   templateUrl: './update-booth.page.html',
   styleUrls: ['./update-booth.page.scss'],
 })
+
 export class UpdateBoothPage implements OnInit {
   boothId: string;
   booths: Booth;

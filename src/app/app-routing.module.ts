@@ -28,6 +28,10 @@ const routes: Routes = [
     loadChildren: () => import('./modules/booths/update-booth/update-booth.module').then(m => m.UpdateBoothPageModule)
   },
   {
+    path: 'booths/booth-detail/:id',
+    loadChildren: () => import('./modules/booths/booth-detail/booth-detail.module').then(m => m.BoothDetailPageModule)
+  },
+  {
     path: 'events',
     loadChildren: () => import('./modules/events/events.module').then( m => m.EventsPageModule)
   },

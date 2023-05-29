@@ -71,10 +71,10 @@
       <ion-item>
         <ion-label position="floating"><sub>Operating Hour</sub></ion-label>
         <ion-label position="floating">From</ion-label>
-        <ion-datetime presentation="time" name="from_time" class="custom-datetime-picker"  [(ngModel)]="booths.from_time"></ion-datetime>
+        <ion-datetime presentation="time" displayFormat="HH:mm" name="from_time" class="custom-datetime-picker" [(ngModel)]="booths.from_time"></ion-datetime>
 
         <ion-label position="floating">To</ion-label>
-        <ion-datetime presentation="time" name="to_time" class="custom-datetime-picker"  [(ngModel)]="booths.to_time"></ion-datetime>
+        <ion-datetime presentation="time" displayFormat="HH:mm" name="to_time" class="custom-datetime-picker" [(ngModel)]="booths.to_time"></ion-datetime>
       </ion-item>
 
       <div>
