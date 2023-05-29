@@ -17,6 +17,18 @@ ion-content {
             font-weight: bold;
         }
 
+        ion-card-content {
+            .booth_logo {
+                border: solid;
+                border-color: #0948ad;
+                margin-right: 5px;
+                width: 35px;
+                height: 35px;
+                -webkit-border-radius: 50%;
+                border-radius: 50%;
+            }
+        }
+
         p {
             white-space: normal;
         }

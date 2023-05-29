@@ -15,6 +15,11 @@
   <form (ngSubmit)="createBooth()">
     <ion-card-content>
       <ion-item>
+        <ion-label position="floating">Booth Logo</ion-label>
+        <ion-input style="margin-top:10px;" type="file" name="booth_logo" [(ngModel)]="booths.logo"></ion-input>
+      </ion-item>
+
+      <ion-item>
           <ion-label position="floating">Booth Name</ion-label>
           <ion-input type="text" name="booth_name" [(ngModel)]="booths.name"></ion-input>
       </ion-item>
@@ -63,12 +68,14 @@
           <ion-input type="text" name="prod_serv" [(ngModel)]="booths.product"></ion-input>
       </ion-item>
 
-      <!-- <ion-item>
-        <div style="display: flex; flex-direction: column;">
-          <ion-label>Products or Services</ion-label>
-          <ion-input type="text" name="prod_serv" [(ngModel)]="booths.product"></ion-input>
-        </div>
-      </ion-item> -->
+      <ion-item>
+        <ion-label position="floating"><sub>Operating Hour</sub></ion-label>
+        <ion-label position="floating">From</ion-label>
+        <ion-datetime presentation="time" name="from_time" class="custom-datetime-picker"  [(ngModel)]="booths.from_time"></ion-datetime>
+
+        <ion-label position="floating">To</ion-label>
+        <ion-datetime presentation="time" name="to_time" class="custom-datetime-picker"  [(ngModel)]="booths.to_time"></ion-datetime>
+      </ion-item>
 
       <div>
         <ion-button expand="full" fill="solid" type="submit" [disabled]="isLoading">Create</ion-button>

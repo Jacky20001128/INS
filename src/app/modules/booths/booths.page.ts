@@ -1,16 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { Router } from '@angular/router';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 
-export interface Bulletin {
+export interface Booth {
   id: string;
-  title: string;
-  description: string;
-  type: string;
-  datetime: string;
-  exhibitor: string;
+  name: string,
+  description: string,
+  type: string,
+  location: string,
+  logo: string,
+  email: string,
+  contact: string,
+  website: string,
+  product: string,
+  from_time: string,
+  to_time: string
 }
 
 @Component({
@@ -21,26 +26,25 @@ export interface Bulletin {
 
 export class BoothsPage implements OnInit {
 
-  private bulletinsCollection: AngularFirestoreCollection<Bulletin>;
-  bulletins$: Observable<Bulletin[]>;
+  private boothCollection: AngularFirestoreCollection<Booth>;
+  booth$: Observable<Booth[]>;
   isLoading: boolean = false;
 
   constructor(
     private nav: NavController,
-    private router: Router,
     private firestore: AngularFirestore
   ) { }
 
   ngOnInit(): void {
-    this.bulletinsCollection = this.firestore.collection<Bulletin>('bulletins');
-    this.bulletins$ = this.bulletinsCollection.valueChanges();
+    this.boothCollection = this.firestore.collection<Booth>('booths');
+    this.booth$ = this.boothCollection.valueChanges();
   }
 
-  deleteBulletin(documentId: string): void {
+  deleteBooth(documentId: string): void {
     this.isLoading = true; // Set loading state to true
   
     setTimeout(() => {
-      const docRef = this.firestore.collection('bulletins').doc(documentId);
+      const docRef = this.firestore.collection('booths').doc(documentId);
       docRef.delete()
         .then(() => {
           console.log('Document successfully deleted!');
@@ -62,5 +66,14 @@ export class BoothsPage implements OnInit {
 
     console.log('successful');
   }
+
+  sanitizeImageUrl(imageUrl: string): string {
+    if (imageUrl.includes('C:\\fakepath\\')) {
+      return 'assets/images/' + imageUrl.substr(imageUrl.lastIndexOf('\\') + 1);
+    } else {
+      return imageUrl;
+    }
+  }
+  
 
 }

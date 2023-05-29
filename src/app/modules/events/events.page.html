@@ -24,9 +24,6 @@
             <ion-button fill="clear" (click)="navigateToUpdate(event.id)"><ion-icon name="create-outline"></ion-icon></ion-button>
           </ion-fab-button>
           <ion-fab-button>
-            <ion-button fill="clear"><ion-icon color="success" name="archive-outline"></ion-icon></ion-button>
-          </ion-fab-button>
-          <ion-fab-button>
             <ion-button fill="clear" (click)="deleteEvent(event.id)" [disabled]="isLoading">
               <ion-icon *ngIf="!isLoading" color="danger" name="trash-outline"></ion-icon>
             </ion-button>
