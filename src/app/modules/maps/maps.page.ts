@@ -496,7 +496,6 @@ export class MapsPage implements OnInit {
       }
     }
 
-
     for (let i = 0; i < wallPositions.length; i++) {
       this.ctxGrid.fillStyle = "#000000"
       this.ctxGrid.fillRect(wallPositions[i].x + 0.5, wallPositions[i].y + 0.5, this.shapedimension - 1, this.shapedimension - 1);
@@ -564,7 +563,7 @@ export class MapsPage implements OnInit {
     }
 
     openSet.push(start);
-
+    const startTime = performance.now(); // Start measuring the time
 
     while (openSet.length > 0) {
 
@@ -604,6 +603,11 @@ export class MapsPage implements OnInit {
             }, this.animDelay)
           );
         }
+
+        const endTime = performance.now(); // Stop measuring the time
+        const timeTaken = (endTime - startTime) / 1000;
+        console.log('Time taken:', timeTaken, 'seconds');
+        
         this.disableButtons = false;
         break;
       }
@@ -807,6 +811,7 @@ export class MapsPage implements OnInit {
 
     let queue = new Queue();
     queue.push(start);
+    const startTime = performance.now(); // Start measuring the time
 
     while (queue.length !== 0) {
       let node = queue.shift();
@@ -818,6 +823,7 @@ export class MapsPage implements OnInit {
           current = current.cameFrom;
           path.push(current);
         }
+
         for (let i = path.length - 1; i >= 0; i--) {
           this.ctxGrid.fillStyle = "#0948ad";
           this.ctxGrid.lineWidth = this.lineWidth;
@@ -828,6 +834,11 @@ export class MapsPage implements OnInit {
             }, this.animDelay)
           );
         }
+
+        const endTime = performance.now(); // Stop measuring the time
+        const timeTaken = (endTime - startTime) / 1000;
+        console.log('Time taken:', timeTaken, 'seconds');
+
         this.disableButtons = false;
         break;
       }

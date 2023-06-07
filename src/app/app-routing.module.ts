@@ -21,7 +21,7 @@ const routes: Routes = [
   },
   {
     path: 'booths',
-    loadChildren: () => import('./modules/booths/booths.module').then( m => m.BoothsPageModule)
+    loadChildren: () => import('./modules/booths/booths.module').then(m => m.BoothsPageModule)
   },
   {
     path: 'booths/update-booth/:id',
@@ -39,6 +39,10 @@ const routes: Routes = [
     path: 'events/update-event/:id',
     loadChildren: () => import('./modules/events/update-event/update-event.module').then(m => m.UpdateEventPageModule)
   },
+  // {
+  //   path: 'bulletin/event-detail/:id',
+  //   loadChildren: () => import('./modules/events/event-detail/event-detail.module').then(m => m.EventDetailPageModule)
+  // },
   {
     path: 'landing',
     loadChildren: () => import('./modules/landing/landing.module').then( m => m.LandingPageModule)
@@ -46,14 +50,6 @@ const routes: Routes = [
   {
     path: 'signup',
     loadChildren: () => import('./modules/signup/signup.module').then( m => m.SignupPageModule)
-  },
-  {
-    path: 'profile',
-    loadChildren: () => import('./modules/profile/profile.module').then( m => m.ProfilePageModule)
-  },
-  {
-    path: 'modules',
-    loadChildren: () => import('./modules/modules.module').then( m => m.ModulesPageModule)
   },
   {
     path: 'maps',

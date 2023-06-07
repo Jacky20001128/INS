@@ -15,7 +15,8 @@ const routes: Routes = [
   {
     path: 'update-bulletin',
     loadChildren: () => import('./update-bulletin/update-bulletin.module').then( m => m.UpdateBulletinPageModule)
-  }
+  },
+
 ];
 
 @NgModule({

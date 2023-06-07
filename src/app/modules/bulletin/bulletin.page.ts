@@ -26,7 +26,7 @@ export class BulletinPage implements OnInit {
 
   constructor(
     private nav: NavController,
-    private firestore: AngularFirestore
+    private firestore: AngularFirestore,
   ) { }
 
   ngOnInit(): void {
@@ -36,20 +36,20 @@ export class BulletinPage implements OnInit {
 
   deleteBulletin(documentId: string): void {
     this.isLoading = true; // Set loading state to true
-  
+
     setTimeout(() => {
       const docRef = this.firestore.collection('bulletins').doc(documentId);
       docRef.delete()
         .then(() => {
           console.log('Document successfully deleted!');
-          this.isLoading = false; // Set loading state to false after deletion`
+          this.isLoading = false; // Set loading state to false after deletion
         })
         .catch((error) => {
           console.error('Error removing document: ', error);
           this.isLoading = false; // Set loading state to false in case of error
         });
     }, 12500); // Set the desired delay in milliseconds (e.g., 2000ms for 2 seconds)
-  }  
+  }
 
   PathtoCreate() {
     this.nav.navigateForward(['bulletin', 'create-bulletin'])
@@ -61,4 +61,9 @@ export class BulletinPage implements OnInit {
     console.log('successful');
   }
 
+  NavToDetail(documentId: string) {
+    this.nav.navigateForward(['bulletin', 'bulletin-detail', documentId]);
+
+    console.log('successful');
+  }
 }

@@ -31,8 +31,14 @@
                 "output": "./svg"
               }
             ],
-            "styles": ["src/theme/variables.scss", "src/global.scss","node_modules/azure-maps-control/dist/atlas.min.css"],
-            "scripts": ["node_modules/azure-maps-control/dist/atlas.min.js"]
+            "styles": [
+              "src/theme/variables.scss",
+              "src/global.scss",
+              "node_modules/azure-maps-control/dist/atlas.min.css"
+            ],
+            "scripts": [
+              "node_modules/azure-maps-control/dist/atlas.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -63,9 +69,6 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
-            },
-            "ci": {
-              "progress": false
             }
           },
           "defaultConfiguration": "production"
@@ -78,9 +81,6 @@
             },
             "development": {
               "browserTarget": "app:build:development"
-            },
-            "ci": {
-              "progress": false
             }
           },
           "defaultConfiguration": "development"
@@ -111,12 +111,14 @@
                 "output": "./svg"
               }
             ],
-            "styles": ["src/theme/variables.scss", "src/global.scss"],
+            "styles": [
+              "src/theme/variables.scss",
+              "src/global.scss"
+            ],
             "scripts": []
           },
           "configurations": {
             "ci": {
-              "progress": false,
               "watch": false
             }
           }
@@ -128,6 +130,30 @@
               "src/**/*.ts",
               "src/**/*.html"
             ]
+          }
+        },
+        "ionic-cordova-serve": {
+          "builder": "@ionic/cordova-builders:cordova-serve",
+          "options": {
+            "cordovaBuildTarget": "app:ionic-cordova-build",
+            "devServerTarget": "app:serve"
+          },
+          "configurations": {
+            "production": {
+              "cordovaBuildTarget": "app:ionic-cordova-build:production",
+              "devServerTarget": "app:serve:production"
+            }
+          }
+        },
+        "ionic-cordova-build": {
+          "builder": "@ionic/cordova-builders:cordova-build",
+          "options": {
+            "browserTarget": "app:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "app:build:production"
+            }
           }
         }
       }

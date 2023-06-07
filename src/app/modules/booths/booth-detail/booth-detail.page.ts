@@ -9,6 +9,7 @@ import { Booth } from 'src/app/modules/booths/booths.page';
   templateUrl: './booth-detail.page.html',
   styleUrls: ['./booth-detail.page.scss'],
 })
+
 export class BoothDetailPage implements OnInit {
   boothId: string;
   booths: Booth;
